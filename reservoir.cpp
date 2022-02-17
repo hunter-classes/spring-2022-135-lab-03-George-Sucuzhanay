@@ -39,4 +39,12 @@ double get_east_storage(std::string date)
     };
     return eastSt;
 };
+double get_min_east(){
+    
+    return 0;
+}
+
+double get_max_east(){
+    return 0;
+}
 
