@@ -1,5 +1,6 @@
 #include <iostream>
 #include "reservoir.h"
+#include "reverseorder.h"
 
 int main()
 
@@ -10,6 +11,7 @@ int main()
   std::cout << "Maximum storage in East basin: " << get_max_east() << std::endl;
   std::cout << "Compare func: " << compare_basins("02/18/2018") << std::endl;
   std::cout << "Compare func: " << compare_basins("01/08/2018") << std::endl;
+  reverse_order("01/09/2018", "02/18/2018");
 
 
   return 0;
