@@ -9,7 +9,7 @@ int main()
   std::cout << "Minimum storage in East basin: "<< get_min_east() << std::endl;
   std::cout << "Maximum storage in East basin: " << get_max_east() << std::endl;
   std::cout << "Compare func: " << compare_basins("02/18/2018") << std::endl;
-  std::cout << "Compare func: " << compare_basins("09/13/2018") << std::endl;
+  std::cout << "Compare func: " << compare_basins("01/08/2018") << std::endl;
 
 
   return 0;

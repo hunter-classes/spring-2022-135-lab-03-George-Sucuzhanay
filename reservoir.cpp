@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include "reservoir.h"
 #include <fstream>
+#include <string>
 #include <climits>
 
 double get_east_storage(std::string date)
@@ -115,7 +116,7 @@ double get_max_east()
 
 std::string compare_basins(std::string date)
 {
-    std::ifstream fin("Current_Reservoir_Levels.tsv");
+    std::ifstream fin("Current_Reservoir_Levels.tsv"); // opens the file here
     if (fin.fail()) 
     {
         std::cerr << "File cannot be opened for reading." << std::endl;
@@ -124,29 +125,33 @@ std::string compare_basins(std::string date)
     }
     else
     {
-        std::string junk, date;        // new string variable
-        std::getline(fin, junk);
-        double eastEl, westSt, westEl, eastSt;
+        std::string del, dateHolder;        // new string variable
+        std::getline(fin, del);
+        std::string eastEl, westSt, westEl, eastSt;
 
-        while(fin >> date >> eastSt >> eastEl >> westSt >> westEl)
+        while(fin >> dateHolder >> eastSt >> eastEl >> westSt >> westEl)
         { 
             // this loop reads the file line-by-line
             // extracting 5 values on each iteration 
             fin.ignore(INT_MAX, '\n'); //skips to the end of line, 
                                 //ignorring the remaining columns 
-        
-            // for example, to print the date and East basin storage:
-            if(westEl > eastEl){
-                return "West";
+                  
+            if(dateHolder.compare(date) == 0)
+            {
+                fin.close();
+                if(std::stod(westEl) > std::stod(eastEl)){
+                        return "West";
+                }
+                else if(westEl < eastEl){
+                    return "East";
+                }
+                else{
+                    return "Equal";
+                }
             }
-            else if(westEl < eastEl){
-                return "East";
-            }
-            else{
-                return "Equal";
-            }
+            
         };
-        fin.close();
+        
     };
     return "";
 }
